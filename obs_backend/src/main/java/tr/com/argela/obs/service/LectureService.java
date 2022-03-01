@@ -33,4 +33,8 @@ public class LectureService {
 	public void assignTeacherToLecture(long teacherId, long lectureId) {
 		lectureRepository.assignTeacherToLecture(teacherId, lectureId);
 	}
+
+	public List<Lecture> getStudentLectures(long studentId) {
+        return lectureRepository.getStudentLectures(studentId);
+    }
 }

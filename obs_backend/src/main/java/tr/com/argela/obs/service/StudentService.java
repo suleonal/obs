@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tr.com.argela.obs.entity.Lecture;
 import tr.com.argela.obs.entity.Student;
 import tr.com.argela.obs.repository.StudentRepository;
 
@@ -21,7 +22,7 @@ public class StudentService {
     public Student save(Student student) {
         return studentRepository.save(student);
     }
-    
+
     public Student findById(Long id) {
         return studentRepository.findById(id).get();
     }

@@ -10,7 +10,6 @@ import tr.com.argela.obs.entity.Teacher;
 //Long
 public interface TeacherRepository extends JpaRepository<Teacher,Long> {
 
-    
-   // public Teacher findByTeacherId(Long id);   
+ 
 
 }

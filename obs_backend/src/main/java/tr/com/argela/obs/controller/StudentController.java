@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import tr.com.argela.obs.entity.Lecture;
 import tr.com.argela.obs.entity.Student;
-
+import tr.com.argela.obs.service.LectureService;
 import tr.com.argela.obs.service.StudentService;
 
 @RestController
@@ -23,29 +24,38 @@ public class StudentController {
 
     @Autowired
     private StudentService service;
-    
+
+    @Autowired
+    private LectureService lectureService;
+
     @PostMapping("/save")
-    public ResponseEntity<Student> save(@RequestBody Student student){
+    public ResponseEntity<Student> save(@RequestBody Student student) {
         Student savedStudent = service.save(student);
-        return new ResponseEntity<Student>(savedStudent,HttpStatus.CREATED);
+        return new ResponseEntity<Student>(savedStudent, HttpStatus.CREATED);
     }
-    
+
     @GetMapping("/all")
-    public ResponseEntity<List<Student>> getAll(){
+    public ResponseEntity<List<Student>> getAll() {
         List<Student> allStudents = service.getAll();
-        return new ResponseEntity<List<Student>>(allStudents,HttpStatus.OK);
-    } 
+        return new ResponseEntity<List<Student>>(allStudents, HttpStatus.OK);
+    }
 
     @GetMapping("{id}")
-    public ResponseEntity<Student> findById(@PathVariable("id") Long id){
+    public ResponseEntity<Student> findById(@PathVariable("id") Long id) {
         Student student = service.findById(id);
-        return new ResponseEntity<Student>(student,HttpStatus.OK);
+        return new ResponseEntity<Student>(student, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable("id") Long id){
+    public ResponseEntity<Void> deleteById(@PathVariable("id") Long id) {
         service.deleteById(id);
         return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
     }
-   
+
+    @GetMapping("/lectures/{studentId}")
+    public ResponseEntity<List<Lecture>> getLecturesByStudentId(@PathVariable("studentId") long studentId) {
+        List<Lecture> lectures = lectureService.getStudentLectures(studentId);
+        return new ResponseEntity<List<Lecture>>(lectures,HttpStatus.OK);
+    }
+
 }
