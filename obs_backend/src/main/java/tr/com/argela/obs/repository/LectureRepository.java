@@ -14,11 +14,9 @@ public interface LectureRepository extends JpaRepository<Lecture, Long> {
     @Modifying
     @Transactional
     @Query(value = "update Lecture set teacher.id=:teacherId WHERE id=:lectureId")
-    public void assignTeacherToLecture(@Param("teacherId") long teacherId ,@Param("lectureId") long lectureId);
+    public void assignTeacherToLecture(@Param("teacherId") long teacherId, @Param("lectureId") long lectureId);
 
-
-    @Modifying
-    @Transactional
     @Query(value = "select l.* from student_lecture sl, lecture l where l.id = sl.lecture_id and sl.student_id = :studentId", nativeQuery = true)
     public List<Lecture> getStudentLectures(@Param("studentId") long studentId);
+
 }
