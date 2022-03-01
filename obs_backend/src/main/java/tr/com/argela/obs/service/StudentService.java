@@ -30,5 +30,12 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
+    public void addLectureToStudent(long lectureId, long studentId) {
+        studentRepository.addLectureToStudent(lectureId, studentId);
+    }
+
+    public void deleteLectureToStudent(long studentId, long lectureId){
+        studentRepository.deleteLectureToStudent(studentId,lectureId);
+    }
 
 }

@@ -34,7 +34,7 @@ public class GradeService {
     public void value(long lectureId, long studentId, int value) {
 
         List<Grade> grades = getGradesByLectureStudentId(lectureId, studentId);
-        if (grades == null|| grades.isEmpty()) {
+        if (grades == null || grades.isEmpty()) {
             gradeRepository.value(lectureId, studentId, value);
         } else {
             Grade grade = grades.get(0);

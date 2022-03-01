@@ -56,8 +56,21 @@ public class StudentController {
     @GetMapping("/lectures/{studentId}")
     public ResponseEntity<List<Lecture>> getLecturesByStudentId(@PathVariable("studentId") long studentId) {
         List<Lecture> lectures = lectureService.getStudentLectures(studentId);
-        return new ResponseEntity<List<Lecture>>(lectures,HttpStatus.OK);
+        return new ResponseEntity<List<Lecture>>(lectures, HttpStatus.OK);
     }
 
+    @PutMapping("/add/{lectureId}/{studentId}")
+    public ResponseEntity<Student> addLectureToStudent(@PathVariable("lectureId") long lectureId,
+            @PathVariable("studentId") long studentId) {
+        service.addLectureToStudent(lectureId, studentId);
+        return new ResponseEntity<Student>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleteLecture/{studentId}/{lectureId}")
+    public ResponseEntity<Void> deleteLectureToStudent(@PathVariable("studentId") long studentId,
+            @PathVariable("lectureId") long lectureId) {
+        service.deleteLectureToStudent(studentId, lectureId);
+        return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+    }
 
 }
