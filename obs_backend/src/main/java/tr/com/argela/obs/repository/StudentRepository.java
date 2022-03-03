@@ -1,7 +1,5 @@
 package tr.com.argela.obs.repository;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,6 +17,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "delete from student_lecture where student_id = :studentId and lecture_id = :lectureId",nativeQuery = true)
+    @Query(value = "delete from student_lecture where student_id = :studentId and lecture_id = :lectureId", nativeQuery = true)
     public void deleteLectureToStudent(@Param("studentId") long studentId, @Param("lectureId") long lectureId);
 }

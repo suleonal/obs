@@ -1,6 +1,6 @@
 package tr.com.argela.obs.entity;
 
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,31 +20,24 @@ import lombok.Setter;
 
 @Entity
 @Data
-@Table(name = "teacher")
 @Getter
 @Setter
-public class Teacher {
+@Table(name = "user_session")
+public class UserSession {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "tel")
-    private int tel;
-
-    @Column(name = "adress")
-    private String adress;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JsonIgnore
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
-    @JsonIgnore
-    private List<Lecture> lectures;
+    @Column(name = "session_id")
+    private String sessionId;
+
+    @Column(name = "login_date")
+    private Date loginDate;
 
 }
