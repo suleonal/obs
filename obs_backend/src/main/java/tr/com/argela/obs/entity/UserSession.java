@@ -30,7 +30,6 @@ public class UserSession {
     private long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
     @JoinColumn(name = "user_id")
     private User user;
 

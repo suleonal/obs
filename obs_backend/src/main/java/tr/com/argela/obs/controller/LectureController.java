@@ -47,9 +47,10 @@ public class LectureController {
     }
 
     @PutMapping("/assign/{teacherId}/{lectureId}")
-	public ResponseEntity<Void> assignTeacherToLecture(@PathVariable("teacherId") long teacherId , @PathVariable("lectureId") long lectureId){
-		service.assignTeacherToLecture(teacherId, lectureId);
+    public ResponseEntity<Void> assignTeacherToLecture(@PathVariable("teacherId") long teacherId,
+            @PathVariable("lectureId") long lectureId) {
+        service.assignTeacherToLecture(teacherId, lectureId);
         return new ResponseEntity<Void>(HttpStatus.OK);
-	}
+    }
 
 }

@@ -1,4 +1,4 @@
-package Util;
+package tr.com.argela.obs.util;
 
 import java.security.MessageDigest;
 

@@ -2,8 +2,6 @@ package tr.com.argela.obs.controller;
 
 import java.util.List;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,20 +56,21 @@ public class GradeController {
     }
 
     @GetMapping("/student/{studentId}")
-    public ResponseEntity<List<Grade>> getGradeStudentById(@PathVariable("studentId") long studentId){
-        List<Grade>  students = service.getGradesByStudentId(studentId);
+    public ResponseEntity<List<Grade>> getGradeStudentById(@PathVariable("studentId") long studentId) {
+        List<Grade> students = service.getGradesByStudentId(studentId);
         return new ResponseEntity<List<Grade>>(students, HttpStatus.OK);
     }
-    
+
     @GetMapping("/lecture/{lectureId}")
-    public ResponseEntity<List<Grade>> getGradeLectureById(@PathVariable("lectureId") long lectureId){
-        List<Grade>  lectures = service.getGradesByLectureId(lectureId);
+    public ResponseEntity<List<Grade>> getGradeLectureById(@PathVariable("lectureId") long lectureId) {
+        List<Grade> lectures = service.getGradesByLectureId(lectureId);
         return new ResponseEntity<List<Grade>>(lectures, HttpStatus.OK);
     }
 
     @GetMapping("/control/{lectureId}/{studentId}")
-    public ResponseEntity<List<Grade>> getGradesByLectureStudentId( @PathVariable("lectureId") long lectureId, @PathVariable("studentId") long studentId){
-        List<Grade>  grades =service.getGradesByLectureStudentId(lectureId,studentId);
+    public ResponseEntity<List<Grade>> getGradesByLectureStudentId(@PathVariable("lectureId") long lectureId,
+            @PathVariable("studentId") long studentId) {
+        List<Grade> grades = service.getGradesByLectureStudentId(lectureId, studentId);
         return new ResponseEntity<List<Grade>>(grades, HttpStatus.OK);
     }
 

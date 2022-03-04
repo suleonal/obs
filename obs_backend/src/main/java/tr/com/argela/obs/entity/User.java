@@ -1,5 +1,8 @@
 package tr.com.argela.obs.entity;
 
+import java.sql.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 import lombok.Getter;
@@ -35,21 +39,21 @@ public class User {
     private String email;
 
     @Column(name = "role_id")
-    private int role_id;
+    private int roleType;
 
     @Column(name = "last_login")
-    private String last_login;
+    private Date lastLogin;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonIgnore
-    @OneToOne(mappedBy = "user")
     private Student student;
 
-    @JsonIgnore
     @OneToOne(mappedBy = "user")
+    @JsonIgnore
     private Teacher teacher;
 
-    @JsonIgnore
     @OneToOne(mappedBy = "user")
+    @JsonIgnore
     private UserSession user_session;
 
 }
