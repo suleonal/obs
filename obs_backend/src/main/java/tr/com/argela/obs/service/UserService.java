@@ -57,11 +57,9 @@ public class UserService {
 
         List<UserSession> userSessions = userSessionRepository.validateToken(token);
 
-        
-
         if (userSessions == null || userSessions.isEmpty()) {
             throw new Exception("you are not authorized");
-        } 
+        }
         UserSession userSession = userSessions.get(0);
         long loginDate = userSession.getLoginDate().getTime();
         long currentTime = new java.util.Date().getTime();
