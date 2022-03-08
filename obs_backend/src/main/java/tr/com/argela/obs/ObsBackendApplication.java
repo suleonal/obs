@@ -6,17 +6,18 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.event.EventListener;
 
+
 @SpringBootApplication
-public class ObsBackendApplication  extends SpringBootServletInitializer {
+
+public class ObsBackendApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ObsBackendApplication.class, args);
 	}
 
-
 	@EventListener(ApplicationReadyEvent.class)
-    public void onAppRun() {
-        System.out.println("OBS App is running");
-    }
+	public void onAppRun() {
+		System.out.println("OBS App is running");
+	}
 
 }
