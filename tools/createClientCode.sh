@@ -1,0 +1,1 @@
+java -jar ./swagger-codegen-cli-2.2.3.jar generate   -i http://localhost:51080/v2/api-docs   --api-package tr.com.argela.obs.client.api   --model-package tr.com.argela.obs.client.model   --invoker-package tr.com.argela.obs.client.invoker   --group-id tr.com.argela   --artifact-id obs-api-client   --artifact-version 1.8   -l java   --library resttemplate   -o obs_client_api

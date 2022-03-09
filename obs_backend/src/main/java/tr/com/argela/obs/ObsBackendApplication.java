@@ -8,7 +8,6 @@ import org.springframework.context.event.EventListener;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-
 @SpringBootApplication
 @EnableSwagger2
 public class ObsBackendApplication extends SpringBootServletInitializer {
