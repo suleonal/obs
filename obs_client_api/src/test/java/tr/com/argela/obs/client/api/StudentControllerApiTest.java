@@ -80,7 +80,8 @@ public class StudentControllerApiTest {
     public void deleteLectureToStudentUsingDELETETest() {
         Long lectureId = null;
         Long studentId = null;
-        api.deleteLectureToStudentUsingDELETE(lectureId, studentId);
+        String token = null;
+        api.deleteLectureToStudentUsingDELETE(lectureId, studentId, token);
 
         // TODO: test validations
     }

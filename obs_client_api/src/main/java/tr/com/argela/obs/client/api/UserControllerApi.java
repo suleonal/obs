@@ -2,6 +2,7 @@ package tr.com.argela.obs.client.api;
 
 import tr.com.argela.obs.client.invoker.ApiClient;
 
+import tr.com.argela.obs.client.model.LoggedUser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-03-09T15:55:12.716+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-03-11T17:36:06.719+03:00")
 @Component("tr.com.argela.obs.client.api.UserControllerApi")
 public class UserControllerApi {
     private ApiClient apiClient;
@@ -44,6 +45,46 @@ public class UserControllerApi {
         this.apiClient = apiClient;
     }
 
+    /**
+     * getLoggedUser
+     * 
+     * <p><b>200</b> - OK
+     * <p><b>401</b> - Unauthorized
+     * <p><b>403</b> - Forbidden
+     * <p><b>404</b> - Not Found
+     * @param token token
+     * @return LoggedUser
+     * @throws RestClientException if an error occurs while attempting to invoke the API
+     */
+    public LoggedUser getLoggedUserUsingGET(String token) throws RestClientException {
+        Object postBody = null;
+        
+        // verify the required parameter 'token' is set
+        if (token == null) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'token' when calling getLoggedUserUsingGET");
+        }
+        
+        String path = UriComponentsBuilder.fromPath("/user/logged-user").build().toUriString();
+        
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+        
+        if (token != null)
+        headerParams.add("token", apiClient.parameterToString(token));
+
+        final String[] accepts = { 
+            "*/*"
+        };
+        final List<MediaType> accept = apiClient.selectHeaderAccept(accepts);
+        final String[] contentTypes = { };
+        final MediaType contentType = apiClient.selectHeaderContentType(contentTypes);
+
+        String[] authNames = new String[] {  };
+
+        ParameterizedTypeReference<LoggedUser> returnType = new ParameterizedTypeReference<LoggedUser>() {};
+        return apiClient.invokeAPI(path, HttpMethod.GET, queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
+    }
     /**
      * login
      * 

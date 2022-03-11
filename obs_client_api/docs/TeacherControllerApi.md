@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**deleteByIdUsingDELETE3**](TeacherControllerApi.md#deleteByIdUsingDELETE3) | **DELETE** /teacher/delete/{id} | deleteById
 [**findByIdUsingGET3**](TeacherControllerApi.md#findByIdUsingGET3) | **GET** /teacher/{id} | findById
 [**getAllUsingGET3**](TeacherControllerApi.md#getAllUsingGET3) | **GET** /teacher/all | getAll
+[**getLecturesByTeacherIdUsingGET**](TeacherControllerApi.md#getLecturesByTeacherIdUsingGET) | **GET** /teacher/lectures/{teacherId} | getLecturesByTeacherId
 [**saveUsingPOST3**](TeacherControllerApi.md#saveUsingPOST3) | **POST** /teacher/save | save
 
 
@@ -133,6 +134,51 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**List&lt;Teacher&gt;**](Teacher.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a name="getLecturesByTeacherIdUsingGET"></a>
+# **getLecturesByTeacherIdUsingGET**
+> List&lt;Lecture&gt; getLecturesByTeacherIdUsingGET(teacherId, token)
+
+getLecturesByTeacherId
+
+### Example
+```java
+// Import classes:
+//import tr.com.argela.obs.client.invoker.ApiException;
+//import tr.com.argela.obs.client.api.TeacherControllerApi;
+
+
+TeacherControllerApi apiInstance = new TeacherControllerApi();
+Integer teacherId = 56; // Integer | teacherId
+String token = "token_example"; // String | token
+try {
+    List<Lecture> result = apiInstance.getLecturesByTeacherIdUsingGET(teacherId, token);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling TeacherControllerApi#getLecturesByTeacherIdUsingGET");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **teacherId** | **Integer**| teacherId |
+ **token** | **String**| token |
+
+### Return type
+
+[**List&lt;Lecture&gt;**](Lecture.md)
 
 ### Authorization
 

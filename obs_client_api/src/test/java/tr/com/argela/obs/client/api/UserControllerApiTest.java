@@ -13,6 +13,7 @@
 
 package tr.com.argela.obs.client.api;
 
+import tr.com.argela.obs.client.model.LoggedUser;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -29,6 +30,22 @@ public class UserControllerApiTest {
 
     private final UserControllerApi api = new UserControllerApi();
 
+    
+    /**
+     * getLoggedUser
+     *
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void getLoggedUserUsingGETTest() {
+        String token = null;
+        LoggedUser response = api.getLoggedUserUsingGET(token);
+
+        // TODO: test validations
+    }
     
     /**
      * login

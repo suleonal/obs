@@ -3,6 +3,7 @@ package tr.com.argela.obs.client.api;
 import tr.com.argela.obs.client.invoker.ApiClient;
 
 import tr.com.argela.obs.client.model.Lecture;
+import tr.com.argela.obs.client.model.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-03-09T15:55:12.716+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-03-11T17:36:06.719+03:00")
 @Component("tr.com.argela.obs.client.api.LectureControllerApi")
 public class LectureControllerApi {
     private ApiClient apiClient;
@@ -55,9 +56,10 @@ public class LectureControllerApi {
      * <p><b>404</b> - Not Found
      * @param lectureId lectureId
      * @param teacherId teacherId
+     * @param token token
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public void assignTeacherToLectureUsingPUT(Long lectureId, Long teacherId) throws RestClientException {
+    public void assignTeacherToLectureUsingPUT(Long lectureId, Long teacherId, String token) throws RestClientException {
         Object postBody = null;
         
         // verify the required parameter 'lectureId' is set
@@ -70,6 +72,11 @@ public class LectureControllerApi {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'teacherId' when calling assignTeacherToLectureUsingPUT");
         }
         
+        // verify the required parameter 'token' is set
+        if (token == null) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'token' when calling assignTeacherToLectureUsingPUT");
+        }
+        
         // create path and map variables
         final Map<String, Object> uriVariables = new HashMap<String, Object>();
         uriVariables.put("lectureId", lectureId);
@@ -79,6 +86,9 @@ public class LectureControllerApi {
         final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
         final HttpHeaders headerParams = new HttpHeaders();
         final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+        
+        if (token != null)
+        headerParams.add("token", apiClient.parameterToString(token));
 
         final String[] accepts = { 
             "*/*"
@@ -102,14 +112,20 @@ public class LectureControllerApi {
      * <p><b>401</b> - Unauthorized
      * <p><b>403</b> - Forbidden
      * @param id id
+     * @param token token
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public void deleteByIdUsingDELETE1(Long id) throws RestClientException {
+    public void deleteByIdUsingDELETE1(Long id, String token) throws RestClientException {
         Object postBody = null;
         
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'id' when calling deleteByIdUsingDELETE1");
+        }
+        
+        // verify the required parameter 'token' is set
+        if (token == null) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'token' when calling deleteByIdUsingDELETE1");
         }
         
         // create path and map variables
@@ -120,6 +136,9 @@ public class LectureControllerApi {
         final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
         final HttpHeaders headerParams = new HttpHeaders();
         final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+        
+        if (token != null)
+        headerParams.add("token", apiClient.parameterToString(token));
 
         final String[] accepts = { 
             "*/*"
@@ -141,15 +160,21 @@ public class LectureControllerApi {
      * <p><b>403</b> - Forbidden
      * <p><b>404</b> - Not Found
      * @param id id
-     * @return Lecture
+     * @param token token
+     * @return ResponseEntity
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public Lecture findByIdUsingGET1(Long id) throws RestClientException {
+    public ResponseEntity findByIdUsingGET1(Long id, String token) throws RestClientException {
         Object postBody = null;
         
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'id' when calling findByIdUsingGET1");
+        }
+        
+        // verify the required parameter 'token' is set
+        if (token == null) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'token' when calling findByIdUsingGET1");
         }
         
         // create path and map variables
@@ -160,6 +185,9 @@ public class LectureControllerApi {
         final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
         final HttpHeaders headerParams = new HttpHeaders();
         final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+        
+        if (token != null)
+        headerParams.add("token", apiClient.parameterToString(token));
 
         final String[] accepts = { 
             "*/*"
@@ -170,7 +198,7 @@ public class LectureControllerApi {
 
         String[] authNames = new String[] {  };
 
-        ParameterizedTypeReference<Lecture> returnType = new ParameterizedTypeReference<Lecture>() {};
+        ParameterizedTypeReference<ResponseEntity> returnType = new ParameterizedTypeReference<ResponseEntity>() {};
         return apiClient.invokeAPI(path, HttpMethod.GET, queryParams, postBody, headerParams, formParams, accept, contentType, authNames, returnType);
     }
     /**
@@ -180,17 +208,26 @@ public class LectureControllerApi {
      * <p><b>401</b> - Unauthorized
      * <p><b>403</b> - Forbidden
      * <p><b>404</b> - Not Found
+     * @param token token
      * @return List&lt;Lecture&gt;
      * @throws RestClientException if an error occurs while attempting to invoke the API
      */
-    public List<Lecture> getAllUsingGET1() throws RestClientException {
+    public List<Lecture> getAllUsingGET1(String token) throws RestClientException {
         Object postBody = null;
+        
+        // verify the required parameter 'token' is set
+        if (token == null) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Missing the required parameter 'token' when calling getAllUsingGET1");
+        }
         
         String path = UriComponentsBuilder.fromPath("/lecture/all").build().toUriString();
         
         final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
         final HttpHeaders headerParams = new HttpHeaders();
         final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+        
+        if (token != null)
+        headerParams.add("token", apiClient.parameterToString(token));
 
         final String[] accepts = { 
             "*/*"

@@ -106,7 +106,7 @@ No authorization required
 
 <a name="deleteLectureToStudentUsingDELETE"></a>
 # **deleteLectureToStudentUsingDELETE**
-> deleteLectureToStudentUsingDELETE(lectureId, studentId)
+> deleteLectureToStudentUsingDELETE(lectureId, studentId, token)
 
 deleteLectureToStudent
 
@@ -120,8 +120,9 @@ deleteLectureToStudent
 StudentControllerApi apiInstance = new StudentControllerApi();
 Long lectureId = 789L; // Long | lectureId
 Long studentId = 789L; // Long | studentId
+String token = "token_example"; // String | token
 try {
-    apiInstance.deleteLectureToStudentUsingDELETE(lectureId, studentId);
+    apiInstance.deleteLectureToStudentUsingDELETE(lectureId, studentId, token);
 } catch (ApiException e) {
     System.err.println("Exception when calling StudentControllerApi#deleteLectureToStudentUsingDELETE");
     e.printStackTrace();
@@ -134,6 +135,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **lectureId** | **Long**| lectureId |
  **studentId** | **Long**| studentId |
+ **token** | **String**| token |
 
 ### Return type
 

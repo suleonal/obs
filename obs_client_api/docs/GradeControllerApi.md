@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 <a name="deleteByIdUsingDELETE"></a>
 # **deleteByIdUsingDELETE**
-> deleteByIdUsingDELETE(id)
+> deleteByIdUsingDELETE(id, token)
 
 deleteById
 
@@ -29,8 +29,9 @@ deleteById
 
 GradeControllerApi apiInstance = new GradeControllerApi();
 Long id = 789L; // Long | id
+String token = "token_example"; // String | token
 try {
-    apiInstance.deleteByIdUsingDELETE(id);
+    apiInstance.deleteByIdUsingDELETE(id, token);
 } catch (ApiException e) {
     System.err.println("Exception when calling GradeControllerApi#deleteByIdUsingDELETE");
     e.printStackTrace();
@@ -42,6 +43,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **Long**| id |
+ **token** | **String**| token |
 
 ### Return type
 
@@ -58,7 +60,7 @@ No authorization required
 
 <a name="findByIdUsingGET"></a>
 # **findByIdUsingGET**
-> Grade findByIdUsingGET(id)
+> ResponseEntity findByIdUsingGET(id, token)
 
 findById
 
@@ -71,8 +73,9 @@ findById
 
 GradeControllerApi apiInstance = new GradeControllerApi();
 Long id = 789L; // Long | id
+String token = "token_example"; // String | token
 try {
-    Grade result = apiInstance.findByIdUsingGET(id);
+    ResponseEntity result = apiInstance.findByIdUsingGET(id, token);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling GradeControllerApi#findByIdUsingGET");
@@ -85,10 +88,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **Long**| id |
+ **token** | **String**| token |
 
 ### Return type
 
-[**Grade**](Grade.md)
+[**ResponseEntity**](ResponseEntity.md)
 
 ### Authorization
 
@@ -101,7 +105,7 @@ No authorization required
 
 <a name="getAllUsingGET"></a>
 # **getAllUsingGET**
-> List&lt;Grade&gt; getAllUsingGET()
+> List&lt;Grade&gt; getAllUsingGET(token)
 
 getAll
 
@@ -113,8 +117,9 @@ getAll
 
 
 GradeControllerApi apiInstance = new GradeControllerApi();
+String token = "token_example"; // String | token
 try {
-    List<Grade> result = apiInstance.getAllUsingGET();
+    List<Grade> result = apiInstance.getAllUsingGET(token);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling GradeControllerApi#getAllUsingGET");
@@ -123,7 +128,10 @@ try {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token** | **String**| token |
 
 ### Return type
 
@@ -140,7 +148,7 @@ No authorization required
 
 <a name="getGradeLectureByIdUsingGET"></a>
 # **getGradeLectureByIdUsingGET**
-> List&lt;Grade&gt; getGradeLectureByIdUsingGET(lectureId)
+> List&lt;Grade&gt; getGradeLectureByIdUsingGET(lectureId, token)
 
 getGradeLectureById
 
@@ -153,8 +161,9 @@ getGradeLectureById
 
 GradeControllerApi apiInstance = new GradeControllerApi();
 Long lectureId = 789L; // Long | lectureId
+String token = "token_example"; // String | token
 try {
-    List<Grade> result = apiInstance.getGradeLectureByIdUsingGET(lectureId);
+    List<Grade> result = apiInstance.getGradeLectureByIdUsingGET(lectureId, token);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling GradeControllerApi#getGradeLectureByIdUsingGET");
@@ -167,6 +176,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **lectureId** | **Long**| lectureId |
+ **token** | **String**| token |
 
 ### Return type
 
@@ -183,7 +193,7 @@ No authorization required
 
 <a name="getGradeStudentByIdUsingGET"></a>
 # **getGradeStudentByIdUsingGET**
-> List&lt;Grade&gt; getGradeStudentByIdUsingGET(studentId)
+> List&lt;Grade&gt; getGradeStudentByIdUsingGET(studentId, token)
 
 getGradeStudentById
 
@@ -196,8 +206,9 @@ getGradeStudentById
 
 GradeControllerApi apiInstance = new GradeControllerApi();
 Long studentId = 789L; // Long | studentId
+String token = "token_example"; // String | token
 try {
-    List<Grade> result = apiInstance.getGradeStudentByIdUsingGET(studentId);
+    List<Grade> result = apiInstance.getGradeStudentByIdUsingGET(studentId, token);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling GradeControllerApi#getGradeStudentByIdUsingGET");
@@ -210,6 +221,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **studentId** | **Long**| studentId |
+ **token** | **String**| token |
 
 ### Return type
 
@@ -226,7 +238,7 @@ No authorization required
 
 <a name="getGradesByLectureStudentIdUsingGET"></a>
 # **getGradesByLectureStudentIdUsingGET**
-> List&lt;Grade&gt; getGradesByLectureStudentIdUsingGET(lectureId, studentId)
+> List&lt;Grade&gt; getGradesByLectureStudentIdUsingGET(lectureId, studentId, token)
 
 getGradesByLectureStudentId
 
@@ -240,8 +252,9 @@ getGradesByLectureStudentId
 GradeControllerApi apiInstance = new GradeControllerApi();
 Long lectureId = 789L; // Long | lectureId
 Long studentId = 789L; // Long | studentId
+String token = "token_example"; // String | token
 try {
-    List<Grade> result = apiInstance.getGradesByLectureStudentIdUsingGET(lectureId, studentId);
+    List<Grade> result = apiInstance.getGradesByLectureStudentIdUsingGET(lectureId, studentId, token);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling GradeControllerApi#getGradesByLectureStudentIdUsingGET");
@@ -255,6 +268,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **lectureId** | **Long**| lectureId |
  **studentId** | **Long**| studentId |
+ **token** | **String**| token |
 
 ### Return type
 
@@ -314,7 +328,7 @@ No authorization required
 
 <a name="valueUsingPUT"></a>
 # **valueUsingPUT**
-> Grade valueUsingPUT(lectureId, studentId, value)
+> Grade valueUsingPUT(lectureId, studentId, token, value)
 
 value
 
@@ -328,9 +342,10 @@ value
 GradeControllerApi apiInstance = new GradeControllerApi();
 Long lectureId = 789L; // Long | lectureId
 Long studentId = 789L; // Long | studentId
+String token = "token_example"; // String | token
 Integer value = 56; // Integer | value
 try {
-    Grade result = apiInstance.valueUsingPUT(lectureId, studentId, value);
+    Grade result = apiInstance.valueUsingPUT(lectureId, studentId, token, value);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling GradeControllerApi#valueUsingPUT");
@@ -344,6 +359,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **lectureId** | **Long**| lectureId |
  **studentId** | **Long**| studentId |
+ **token** | **String**| token |
  **value** | **Integer**| value |
 
 ### Return type

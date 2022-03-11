@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 <a name="assignTeacherToLectureUsingPUT"></a>
 # **assignTeacherToLectureUsingPUT**
-> assignTeacherToLectureUsingPUT(lectureId, teacherId)
+> assignTeacherToLectureUsingPUT(lectureId, teacherId, token)
 
 assignTeacherToLecture
 
@@ -27,8 +27,9 @@ assignTeacherToLecture
 LectureControllerApi apiInstance = new LectureControllerApi();
 Long lectureId = 789L; // Long | lectureId
 Long teacherId = 789L; // Long | teacherId
+String token = "token_example"; // String | token
 try {
-    apiInstance.assignTeacherToLectureUsingPUT(lectureId, teacherId);
+    apiInstance.assignTeacherToLectureUsingPUT(lectureId, teacherId, token);
 } catch (ApiException e) {
     System.err.println("Exception when calling LectureControllerApi#assignTeacherToLectureUsingPUT");
     e.printStackTrace();
@@ -41,6 +42,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **lectureId** | **Long**| lectureId |
  **teacherId** | **Long**| teacherId |
+ **token** | **String**| token |
 
 ### Return type
 
@@ -57,7 +59,7 @@ No authorization required
 
 <a name="deleteByIdUsingDELETE1"></a>
 # **deleteByIdUsingDELETE1**
-> deleteByIdUsingDELETE1(id)
+> deleteByIdUsingDELETE1(id, token)
 
 deleteById
 
@@ -70,8 +72,9 @@ deleteById
 
 LectureControllerApi apiInstance = new LectureControllerApi();
 Long id = 789L; // Long | id
+String token = "token_example"; // String | token
 try {
-    apiInstance.deleteByIdUsingDELETE1(id);
+    apiInstance.deleteByIdUsingDELETE1(id, token);
 } catch (ApiException e) {
     System.err.println("Exception when calling LectureControllerApi#deleteByIdUsingDELETE1");
     e.printStackTrace();
@@ -83,6 +86,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **Long**| id |
+ **token** | **String**| token |
 
 ### Return type
 
@@ -99,7 +103,7 @@ No authorization required
 
 <a name="findByIdUsingGET1"></a>
 # **findByIdUsingGET1**
-> Lecture findByIdUsingGET1(id)
+> ResponseEntity findByIdUsingGET1(id, token)
 
 findById
 
@@ -112,8 +116,9 @@ findById
 
 LectureControllerApi apiInstance = new LectureControllerApi();
 Long id = 789L; // Long | id
+String token = "token_example"; // String | token
 try {
-    Lecture result = apiInstance.findByIdUsingGET1(id);
+    ResponseEntity result = apiInstance.findByIdUsingGET1(id, token);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling LectureControllerApi#findByIdUsingGET1");
@@ -126,10 +131,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **Long**| id |
+ **token** | **String**| token |
 
 ### Return type
 
-[**Lecture**](Lecture.md)
+[**ResponseEntity**](ResponseEntity.md)
 
 ### Authorization
 
@@ -142,7 +148,7 @@ No authorization required
 
 <a name="getAllUsingGET1"></a>
 # **getAllUsingGET1**
-> List&lt;Lecture&gt; getAllUsingGET1()
+> List&lt;Lecture&gt; getAllUsingGET1(token)
 
 getAll
 
@@ -154,8 +160,9 @@ getAll
 
 
 LectureControllerApi apiInstance = new LectureControllerApi();
+String token = "token_example"; // String | token
 try {
-    List<Lecture> result = apiInstance.getAllUsingGET1();
+    List<Lecture> result = apiInstance.getAllUsingGET1(token);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling LectureControllerApi#getAllUsingGET1");
@@ -164,7 +171,10 @@ try {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token** | **String**| token |
 
 ### Return type
 

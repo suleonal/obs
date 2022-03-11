@@ -4,9 +4,53 @@ All URIs are relative to *https://localhost:51080*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**getLoggedUserUsingGET**](UserControllerApi.md#getLoggedUserUsingGET) | **GET** /user/logged-user | getLoggedUser
 [**loginUsingPUT**](UserControllerApi.md#loginUsingPUT) | **PUT** /user/login/{user}/{password} | login
 [**logoutUsingDELETE**](UserControllerApi.md#logoutUsingDELETE) | **DELETE** /user/logout/{token} | logout
 
+
+<a name="getLoggedUserUsingGET"></a>
+# **getLoggedUserUsingGET**
+> LoggedUser getLoggedUserUsingGET(token)
+
+getLoggedUser
+
+### Example
+```java
+// Import classes:
+//import tr.com.argela.obs.client.invoker.ApiException;
+//import tr.com.argela.obs.client.api.UserControllerApi;
+
+
+UserControllerApi apiInstance = new UserControllerApi();
+String token = "token_example"; // String | token
+try {
+    LoggedUser result = apiInstance.getLoggedUserUsingGET(token);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling UserControllerApi#getLoggedUserUsingGET");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **token** | **String**| token |
+
+### Return type
+
+[**LoggedUser**](LoggedUser.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
 
 <a name="loginUsingPUT"></a>
 # **loginUsingPUT**

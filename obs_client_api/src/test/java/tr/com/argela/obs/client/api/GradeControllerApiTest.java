@@ -14,6 +14,7 @@
 package tr.com.argela.obs.client.api;
 
 import tr.com.argela.obs.client.model.Grade;
+import tr.com.argela.obs.client.model.ResponseEntity;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -42,7 +43,8 @@ public class GradeControllerApiTest {
     @Test
     public void deleteByIdUsingDELETETest() {
         Long id = null;
-        api.deleteByIdUsingDELETE(id);
+        String token = null;
+        api.deleteByIdUsingDELETE(id, token);
 
         // TODO: test validations
     }
@@ -58,7 +60,8 @@ public class GradeControllerApiTest {
     @Test
     public void findByIdUsingGETTest() {
         Long id = null;
-        Grade response = api.findByIdUsingGET(id);
+        String token = null;
+        ResponseEntity response = api.findByIdUsingGET(id, token);
 
         // TODO: test validations
     }
@@ -73,7 +76,8 @@ public class GradeControllerApiTest {
      */
     @Test
     public void getAllUsingGETTest() {
-        List<Grade> response = api.getAllUsingGET();
+        String token = null;
+        List<Grade> response = api.getAllUsingGET(token);
 
         // TODO: test validations
     }
@@ -89,7 +93,8 @@ public class GradeControllerApiTest {
     @Test
     public void getGradeLectureByIdUsingGETTest() {
         Long lectureId = null;
-        List<Grade> response = api.getGradeLectureByIdUsingGET(lectureId);
+        String token = null;
+        List<Grade> response = api.getGradeLectureByIdUsingGET(lectureId, token);
 
         // TODO: test validations
     }
@@ -105,7 +110,8 @@ public class GradeControllerApiTest {
     @Test
     public void getGradeStudentByIdUsingGETTest() {
         Long studentId = null;
-        List<Grade> response = api.getGradeStudentByIdUsingGET(studentId);
+        String token = null;
+        List<Grade> response = api.getGradeStudentByIdUsingGET(studentId, token);
 
         // TODO: test validations
     }
@@ -122,7 +128,8 @@ public class GradeControllerApiTest {
     public void getGradesByLectureStudentIdUsingGETTest() {
         Long lectureId = null;
         Long studentId = null;
-        List<Grade> response = api.getGradesByLectureStudentIdUsingGET(lectureId, studentId);
+        String token = null;
+        List<Grade> response = api.getGradesByLectureStudentIdUsingGET(lectureId, studentId, token);
 
         // TODO: test validations
     }
@@ -155,8 +162,9 @@ public class GradeControllerApiTest {
     public void valueUsingPUTTest() {
         Long lectureId = null;
         Long studentId = null;
+        String token = null;
         Integer value = null;
-        Grade response = api.valueUsingPUT(lectureId, studentId, value);
+        Grade response = api.valueUsingPUT(lectureId, studentId, token, value);
 
         // TODO: test validations
     }

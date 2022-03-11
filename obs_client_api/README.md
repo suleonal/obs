@@ -72,8 +72,9 @@ public class GradeControllerApiExample {
         
         GradeControllerApi apiInstance = new GradeControllerApi();
         Long id = 789L; // Long | id
+        String token = "token_example"; // String | token
         try {
-            apiInstance.deleteByIdUsingDELETE(id);
+            apiInstance.deleteByIdUsingDELETE(id, token);
         } catch (ApiException e) {
             System.err.println("Exception when calling GradeControllerApi#deleteByIdUsingDELETE");
             e.printStackTrace();
@@ -112,7 +113,9 @@ Class | Method | HTTP request | Description
 *TeacherControllerApi* | [**deleteByIdUsingDELETE3**](docs/TeacherControllerApi.md#deleteByIdUsingDELETE3) | **DELETE** /teacher/delete/{id} | deleteById
 *TeacherControllerApi* | [**findByIdUsingGET3**](docs/TeacherControllerApi.md#findByIdUsingGET3) | **GET** /teacher/{id} | findById
 *TeacherControllerApi* | [**getAllUsingGET3**](docs/TeacherControllerApi.md#getAllUsingGET3) | **GET** /teacher/all | getAll
+*TeacherControllerApi* | [**getLecturesByTeacherIdUsingGET**](docs/TeacherControllerApi.md#getLecturesByTeacherIdUsingGET) | **GET** /teacher/lectures/{teacherId} | getLecturesByTeacherId
 *TeacherControllerApi* | [**saveUsingPOST3**](docs/TeacherControllerApi.md#saveUsingPOST3) | **POST** /teacher/save | save
+*UserControllerApi* | [**getLoggedUserUsingGET**](docs/UserControllerApi.md#getLoggedUserUsingGET) | **GET** /user/logged-user | getLoggedUser
 *UserControllerApi* | [**loginUsingPUT**](docs/UserControllerApi.md#loginUsingPUT) | **PUT** /user/login/{user}/{password} | login
 *UserControllerApi* | [**logoutUsingDELETE**](docs/UserControllerApi.md#logoutUsingDELETE) | **DELETE** /user/logout/{token} | logout
 
@@ -121,6 +124,7 @@ Class | Method | HTTP request | Description
 
  - [Grade](docs/Grade.md)
  - [Lecture](docs/Lecture.md)
+ - [LoggedUser](docs/LoggedUser.md)
  - [ResponseEntity](docs/ResponseEntity.md)
  - [Student](docs/Student.md)
  - [Teacher](docs/Teacher.md)

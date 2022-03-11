@@ -14,6 +14,7 @@
 package tr.com.argela.obs.client.api;
 
 import tr.com.argela.obs.client.model.Lecture;
+import tr.com.argela.obs.client.model.ResponseEntity;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -43,7 +44,8 @@ public class LectureControllerApiTest {
     public void assignTeacherToLectureUsingPUTTest() {
         Long lectureId = null;
         Long teacherId = null;
-        api.assignTeacherToLectureUsingPUT(lectureId, teacherId);
+        String token = null;
+        api.assignTeacherToLectureUsingPUT(lectureId, teacherId, token);
 
         // TODO: test validations
     }
@@ -59,7 +61,8 @@ public class LectureControllerApiTest {
     @Test
     public void deleteByIdUsingDELETE1Test() {
         Long id = null;
-        api.deleteByIdUsingDELETE1(id);
+        String token = null;
+        api.deleteByIdUsingDELETE1(id, token);
 
         // TODO: test validations
     }
@@ -75,7 +78,8 @@ public class LectureControllerApiTest {
     @Test
     public void findByIdUsingGET1Test() {
         Long id = null;
-        Lecture response = api.findByIdUsingGET1(id);
+        String token = null;
+        ResponseEntity response = api.findByIdUsingGET1(id, token);
 
         // TODO: test validations
     }
@@ -90,7 +94,8 @@ public class LectureControllerApiTest {
      */
     @Test
     public void getAllUsingGET1Test() {
-        List<Lecture> response = api.getAllUsingGET1();
+        String token = null;
+        List<Lecture> response = api.getAllUsingGET1(token);
 
         // TODO: test validations
     }

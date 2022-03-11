@@ -24,7 +24,7 @@ import org.joda.time.LocalDate;
 /**
  * User
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-03-09T15:55:12.716+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-03-11T17:36:06.719+03:00")
 public class User {
   @JsonProperty("email")
   private String email = null;

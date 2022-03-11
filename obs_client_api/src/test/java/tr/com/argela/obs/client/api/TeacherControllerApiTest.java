@@ -13,6 +13,7 @@
 
 package tr.com.argela.obs.client.api;
 
+import tr.com.argela.obs.client.model.Lecture;
 import tr.com.argela.obs.client.model.ResponseEntity;
 import tr.com.argela.obs.client.model.Teacher;
 import org.junit.Test;
@@ -78,6 +79,23 @@ public class TeacherControllerApiTest {
     public void getAllUsingGET3Test() {
         String token = null;
         List<Teacher> response = api.getAllUsingGET3(token);
+
+        // TODO: test validations
+    }
+    
+    /**
+     * getLecturesByTeacherId
+     *
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void getLecturesByTeacherIdUsingGETTest() {
+        Integer teacherId = null;
+        String token = null;
+        List<Lecture> response = api.getLecturesByTeacherIdUsingGET(teacherId, token);
 
         // TODO: test validations
     }
