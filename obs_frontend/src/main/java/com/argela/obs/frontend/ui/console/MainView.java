@@ -21,6 +21,7 @@ import tr.com.argela.obs.client.api.TeacherControllerApi;
 import tr.com.argela.obs.client.api.UserControllerApi;
 import tr.com.argela.obs.client.model.Grade;
 import tr.com.argela.obs.client.model.Lecture;
+import tr.com.argela.obs.client.model.LoggedUser;
 
 @Component
 public class MainView {
@@ -48,8 +49,8 @@ public class MainView {
     List<String> menuTeacher = new ArrayList();
 
     RoleType loggedRole;
+    LoggedUser loggedUser;
 
-    long hardCodedStudentId = 1;
 
     public MainView() {
         sysin = new BufferedReader(new InputStreamReader(System.in));
@@ -86,8 +87,8 @@ public class MainView {
         System.out.print("Şifre :");
         String password = readLine();
         if (login(username, password)) {
-            findLoginType();
 
+            findLoginType();
             displayMainPage();
         } else {
             displayBrake();
@@ -97,12 +98,10 @@ public class MainView {
     }
 
     private void findLoginType() {
-        try {
-            teacherControllerApi.getAllUsingGET3(token);
-            loggedRole = RoleType.Teacher;
-        } catch (Exception e) {
-            loggedRole = RoleType.Student;
-        }
+        loggedUser = userControllerApi.getLoggedUserUsingGET(token);
+        loggedRole = RoleType.Student.getValue() == loggedUser.getRoleType() ? RoleType.Student : RoleType.Teacher;
+
+        System.out.println("Hoşgeldin "+ loggedUser.getEntityName());
     }
 
     private void displayMainPage() {
@@ -157,7 +156,7 @@ public class MainView {
     private void displayTeacherLectures() {
         displayBrake();
         System.out.println("Öğretmene ait dersler aşağıdaki gibidir: ");
-        List<Lecture> lectures = teacherControllerApi.
+        List<Lecture> lectures = teacherControllerApi.getLecturesByTeacherIdUsingGET(loggedUser.getEntityId().intValue(), token);
         System.out.println("Ders\t\t\t| Hoca\t");
         displayBrakeShort();
         for (Lecture lecture : lectures) {
@@ -193,7 +192,7 @@ public class MainView {
             }
             case 5: {
                 logout();
-               
+
                 System.exit(0);
                 break;
             }
@@ -204,7 +203,7 @@ public class MainView {
     private void displayStudentLectures() {
         displayBrake();
         System.out.println("Öğrenciye ait dersler aşağıdaki gibidir: ");
-        List<Lecture> lectures = studentControllerApi.getLecturesByStudentIdUsingGET(hardCodedStudentId, token);
+        List<Lecture> lectures = studentControllerApi.getLecturesByStudentIdUsingGET(loggedUser.getEntityId(), token);
         System.out.println("Ders\t\t\t| Hoca\t");
         displayBrakeShort();
         for (Lecture lecture : lectures) {
@@ -216,10 +215,7 @@ public class MainView {
         displayBrake();
         System.out.println("Çıkaracağınız dersi seçin: ");
 
-        
-        List<Lecture> studentLectures = studentControllerApi.getLecturesByStudentIdUsingGET(hardCodedStudentId, token);
-
-       
+        List<Lecture> studentLectures = studentControllerApi.getLecturesByStudentIdUsingGET(loggedUser.getEntityId(), token);
 
         Map<Integer, Lecture> lectureMapByIndex = new LinkedHashMap<>();
         int count = 1;
@@ -236,15 +232,15 @@ public class MainView {
             return;
         }
 
-        studentControllerApi.deleteLectureToStudentUsingDELETE(selectedLecture.getId(), hardCodedStudentId);
+        studentControllerApi.deleteLectureToStudentUsingDELETE(selectedLecture.getId(), loggedUser.getEntityId(),token);
         System.out.println("Ders başarı ile silindi.");
     }
 
     private void addLectureToStudent() {
         displayBrake();
         System.out.println("Eklenecek dersi seciniz");
-        List<Lecture> allLectures = lectureControllerApi.getAllUsingGET1();
-        List<Lecture> studentLectures = studentControllerApi.getLecturesByStudentIdUsingGET(hardCodedStudentId, token);
+        List<Lecture> allLectures = lectureControllerApi.getAllUsingGET1(token);
+        List<Lecture> studentLectures = studentControllerApi.getLecturesByStudentIdUsingGET(loggedUser.getEntityId(), token);
 
         Map<Long, Lecture> studentLecturesMapById = new HashMap<>(); // ogrencinin derslerini lecture id ile map le
         for (Lecture lecture : studentLectures) {
@@ -274,14 +270,14 @@ public class MainView {
             return;
         }
 
-        studentControllerApi.addLectureToStudentUsingPUT(selectedLecture.getId(), hardCodedStudentId, token);
+        studentControllerApi.addLectureToStudentUsingPUT(selectedLecture.getId(), loggedUser.getEntityId(), token);
         System.out.println("Ders başarı ile eklendi.");
 
     }
 
     private void getGradeStudentById() {
         displayBrake();
-        List<Grade> grades = gradeControllerApi.getGradeStudentByIdUsingGET(hardCodedStudentId);
+        List<Grade> grades = gradeControllerApi.getGradeStudentByIdUsingGET(loggedUser.getEntityId(),token);
         System.out.println("Ders\t\t\t| Not\t");
         displayBrakeShort();
         for (Grade grade : grades) {
