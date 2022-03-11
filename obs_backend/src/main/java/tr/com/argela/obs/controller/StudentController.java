@@ -92,6 +92,7 @@ public class StudentController {
             @PathVariable("lectureId") long lectureId,
             @PathVariable("studentId") long studentId) {
         try {
+            userService.validateToken(token, RoleType.Student);
             service.addLectureToStudent(lectureId, studentId);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
@@ -100,9 +101,11 @@ public class StudentController {
     }
 
     @DeleteMapping("/deleteLecture/{studentId}/{lectureId}")
-    public ResponseEntity<Void> deleteLectureToStudent(@PathVariable("studentId") long studentId,
+    public ResponseEntity<Void> deleteLectureToStudent(@RequestHeader("token") String token,
+            @PathVariable("studentId") long studentId,
             @PathVariable("lectureId") long lectureId) {
         try {
+            userService.validateToken(token, RoleType.Student);
             service.deleteLectureToStudent(studentId, lectureId);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (Exception e) {

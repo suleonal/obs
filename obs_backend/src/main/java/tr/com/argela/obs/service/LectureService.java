@@ -35,6 +35,10 @@ public class LectureService {
 	}
 
 	public List<Lecture> getStudentLectures(long studentId) {
-        return lectureRepository.getStudentLectures(studentId);
-    }
+		return lectureRepository.getStudentLectures(studentId);
+	}
+
+	public List<Lecture> getTeacherLectures(int teacherId) {
+		return lectureRepository.getTeacherLectures(teacherId);
+	}
 }

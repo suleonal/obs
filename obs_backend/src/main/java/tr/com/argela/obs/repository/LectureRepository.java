@@ -19,4 +19,7 @@ public interface LectureRepository extends JpaRepository<Lecture, Long> {
     @Query(value = "select l.* from student_lecture sl, lecture l where l.id = sl.lecture_id and sl.student_id = :studentId", nativeQuery = true)
     public List<Lecture> getStudentLectures(@Param("studentId") long studentId);
 
+    @Query(value = "select * from lecture where teacher_id = :teacherId", nativeQuery = true)
+    public List<Lecture> getTeacherLectures(@Param("teacherId") int teacherId);
+
 }

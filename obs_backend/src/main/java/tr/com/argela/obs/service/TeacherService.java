@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
+
 import tr.com.argela.obs.entity.Teacher;
 import tr.com.argela.obs.repository.TeacherRepository;
 
@@ -32,4 +33,3 @@ public class TeacherService {
     }
 
 }
-

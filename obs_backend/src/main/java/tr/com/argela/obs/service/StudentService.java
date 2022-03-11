@@ -20,10 +20,6 @@ public class StudentService {
     private UserSessionRepository user_session_repo;
 
     public List<Student> getAll() {
-        // if sessionid not null, role id = 1 ise session suresi geçmediyse;
-        // aşağıdakiler olacak
-        // geri kalan else bütün durumlar 401
-        // if(user_session_repo.checkSession(user) != null && user.roleId == 1)
         return studentRepository.findAll();
     }
 

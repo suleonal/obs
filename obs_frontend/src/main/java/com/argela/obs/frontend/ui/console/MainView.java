@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -20,6 +19,7 @@ import tr.com.argela.obs.client.api.LectureControllerApi;
 import tr.com.argela.obs.client.api.StudentControllerApi;
 import tr.com.argela.obs.client.api.TeacherControllerApi;
 import tr.com.argela.obs.client.api.UserControllerApi;
+import tr.com.argela.obs.client.model.Grade;
 import tr.com.argela.obs.client.model.Lecture;
 
 @Component
@@ -57,6 +57,7 @@ public class MainView {
         menuStudent.add("Yeni Ders Ekle");
         menuStudent.add("Ders Çıkar");
         menuStudent.add("Notları Göster");
+        menuStudent.add("Çıkış Yap");
 
         menuTeacher.add("Dersleri Göster");
         menuTeacher.add("Ders Hocası olarak ata");
@@ -79,7 +80,7 @@ public class MainView {
     }
 
     private void displayLoginPage() {
-        System.out.println("Giriş için bilgilerini doldurunuz");
+        System.out.println("Giriş için bilgileri doldurunuz");
         System.out.print("Kullanici adi:");
         String username = readLine();
         System.out.print("Şifre :");
@@ -90,7 +91,7 @@ public class MainView {
             displayMainPage();
         } else {
             displayBrake();
-            System.out.println("Giriş bilgilerini doğru değil lütfen tekrar deneyiniz");
+            System.out.println("Giriş bilgileri doğru değil lütfen tekrar deneyiniz");
             displayLoginPage();
         }
     }
@@ -111,10 +112,57 @@ public class MainView {
                 break;
             }
             case Teacher: {
+                displayMainPageTeacher();
                 break;
             }
         }
 
+    }
+
+    private void displayMainPageTeacher() {
+        displayBrake();
+        System.out.println("Öğretmen Ana sayfasına hoşgeldiniz");
+        int count = 1;
+        for (String menuItem : menuTeacher) {
+            System.out.println((count++) + " -) " + menuItem);
+        }
+        System.out.print("Seciminiz:");
+        int selection = Integer.parseInt(readLine());
+        switch (selection) {
+            case 1: {
+                displayTeacherLectures();
+                break;
+            }
+            case 2: {
+                addLectureToStudent();
+                break;
+            }
+            case 3: {
+                deleteLectureToStudent();
+                break;
+            }
+            case 4: {
+                getGradeStudentById();
+                break;
+            }
+            case 5: {
+                logout();
+                displayLoginPage();
+                break;
+            }
+        }
+        displayMainPageTeacher();
+    }
+
+    private void displayTeacherLectures() {
+        displayBrake();
+        System.out.println("Öğretmene ait dersler aşağıdaki gibidir: ");
+        List<Lecture> lectures = teacherControllerApi.
+        System.out.println("Ders\t\t\t| Hoca\t");
+        displayBrakeShort();
+        for (Lecture lecture : lectures) {
+            System.out.println(lecture.getName() + "\t\t| " + lecture.getTeacher().getName());
+        }
     }
 
     private void displayMainPageStudent() {
@@ -135,13 +183,27 @@ public class MainView {
                 addLectureToStudent();
                 break;
             }
+            case 3: {
+                deleteLectureToStudent();
+                break;
+            }
+            case 4: {
+                getGradeStudentById();
+                break;
+            }
+            case 5: {
+                logout();
+               
+                System.exit(0);
+                break;
+            }
         }
         displayMainPageStudent();
     }
 
     private void displayStudentLectures() {
         displayBrake();
-        System.out.println("Öğrenci ye ait dersler aşağıdaki gibidir: ");
+        System.out.println("Öğrenciye ait dersler aşağıdaki gibidir: ");
         List<Lecture> lectures = studentControllerApi.getLecturesByStudentIdUsingGET(hardCodedStudentId, token);
         System.out.println("Ders\t\t\t| Hoca\t");
         displayBrakeShort();
@@ -150,13 +212,41 @@ public class MainView {
         }
     }
 
+    private void deleteLectureToStudent() {
+        displayBrake();
+        System.out.println("Çıkaracağınız dersi seçin: ");
+
+        
+        List<Lecture> studentLectures = studentControllerApi.getLecturesByStudentIdUsingGET(hardCodedStudentId, token);
+
+       
+
+        Map<Integer, Lecture> lectureMapByIndex = new LinkedHashMap<>();
+        int count = 1;
+        for (Lecture lecture : studentLectures) {
+            lectureMapByIndex.put(count, lecture);
+            System.out.println(count + "-)" + lecture.getName());
+            count++;
+        }
+        int selection = Integer.parseInt(readLine());
+        Lecture selectedLecture = lectureMapByIndex.get(selection);
+
+        if (selectedLecture == null) {
+            System.out.println("Ders secimi hatali");
+            return;
+        }
+
+        studentControllerApi.deleteLectureToStudentUsingDELETE(selectedLecture.getId(), hardCodedStudentId);
+        System.out.println("Ders başarı ile silindi.");
+    }
+
     private void addLectureToStudent() {
         displayBrake();
         System.out.println("Eklenecek dersi seciniz");
         List<Lecture> allLectures = lectureControllerApi.getAllUsingGET1();
         List<Lecture> studentLectures = studentControllerApi.getLecturesByStudentIdUsingGET(hardCodedStudentId, token);
 
-        Map<Long, Lecture> studentLecturesMapById = new HashMap<>();  //ogrencinin derslerini lecture id ile map le 
+        Map<Long, Lecture> studentLecturesMapById = new HashMap<>(); // ogrencinin derslerini lecture id ile map le
         for (Lecture lecture : studentLectures) {
             studentLecturesMapById.put(lecture.getId(), lecture);
         }
@@ -171,8 +261,8 @@ public class MainView {
             count++;
         }
 
-        if(count ==1){
-            System.out.println("Tüm dersleri eklendiniz. Yeni ders kalmadi");
+        if (count == 1) {
+            System.out.println("Tüm dersleri eklediniz. Yeni ders kalmadi");
             return;
         }
 
@@ -187,6 +277,20 @@ public class MainView {
         studentControllerApi.addLectureToStudentUsingPUT(selectedLecture.getId(), hardCodedStudentId, token);
         System.out.println("Ders başarı ile eklendi.");
 
+    }
+
+    private void getGradeStudentById() {
+        displayBrake();
+        List<Grade> grades = gradeControllerApi.getGradeStudentByIdUsingGET(hardCodedStudentId);
+        System.out.println("Ders\t\t\t| Not\t");
+        displayBrakeShort();
+        for (Grade grade : grades) {
+            System.out.println(grade.getLecture().getName() + "\t\t| " + grade.getValue());
+        }
+    }
+
+    private void logout() {
+        userControllerApi.logoutUsingDELETE(token);
     }
 
     private boolean login(String username, String password) {

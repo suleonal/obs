@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 import tr.com.argela.obs.constant.RoleType;
+import tr.com.argela.obs.entity.LoggedUser;
+import tr.com.argela.obs.entity.Student;
+import tr.com.argela.obs.entity.Teacher;
 import tr.com.argela.obs.entity.User;
 import tr.com.argela.obs.entity.UserSession;
 import tr.com.argela.obs.repository.UserRepository;
@@ -69,4 +72,33 @@ public class UserService {
             throw new Exception("timeout");
         }
     }
+
+    public LoggedUser getLoggedUser(String token) throws Exception {
+        List<UserSession> userSessions = userSessionRepository.validateToken(token);
+
+        if (userSessions == null || userSessions.isEmpty()) {
+            throw new Exception("you are not authorized");
+        }
+        UserSession userSession = userSessions.get(0);
+        LoggedUser loggedUser = new LoggedUser();
+        loggedUser.setId(userSession.getUser().getId());
+        loggedUser.setRoleType(userSession.getUser().getRoleType());
+        loggedUser.setEmail(userSession.getUser().getEmail());
+
+        switch (userSession.getUser().getRoleType()) {
+
+            case 1: {
+                loggedUser.setEntityId(userSession.getUser().getStudent().getId());
+                loggedUser.setEntityName(userSession.getUser().getStudent().getName());
+                break;
+            }
+            case 2: {
+                loggedUser.setEntityId(userSession.getUser().getTeacher().getId());
+                loggedUser.setEntityName(userSession.getUser().getTeacher().getName());
+                break;
+            }
+        }
+        return loggedUser;
+    }
+
 }

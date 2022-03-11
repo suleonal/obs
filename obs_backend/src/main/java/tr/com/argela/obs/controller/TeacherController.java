@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tr.com.argela.obs.constant.RoleType;
+import tr.com.argela.obs.entity.Lecture;
 import tr.com.argela.obs.entity.Teacher;
+import tr.com.argela.obs.service.LectureService;
 import tr.com.argela.obs.service.TeacherService;
 import tr.com.argela.obs.service.UserService;
 
@@ -30,6 +32,9 @@ public class TeacherController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private LectureService lectureService;
 
     @PostMapping("/save")
     public ResponseEntity<Teacher> save(@RequestBody Teacher teacher) {
@@ -69,4 +74,15 @@ public class TeacherController {
         }
     }
 
+    @GetMapping("/lectures/{teacherId}")
+    public ResponseEntity<List<Lecture>> getLecturesByTeacherId(@RequestHeader("token") String token,
+            @PathVariable("teacherId") int teacherId) {
+        try {
+            userService.validateToken(token, RoleType.Teacher);
+            List<Lecture> lectures = lectureService.getTeacherLectures(teacherId);
+            return new ResponseEntity<List<Lecture>>(lectures, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<List<Lecture>>(new ArrayList(), HttpStatus.UNAUTHORIZED);
+        }
+    }
 }
