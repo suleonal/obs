@@ -137,6 +137,23 @@ public class StudentControllerApiTest {
     }
     
     /**
+     * getStudentByLectureId
+     *
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void getStudentByLectureIdUsingGETTest() {
+        Integer lectureId = null;
+        String token = null;
+        List<Student> response = api.getStudentByLectureIdUsingGET(lectureId, token);
+
+        // TODO: test validations
+    }
+    
+    /**
      * save
      *
      * 

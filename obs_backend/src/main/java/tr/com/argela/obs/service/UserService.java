@@ -56,7 +56,7 @@ public class UserService {
         userSessionRepository.logoutSession(sessionId);
     }
 
-    public void validateToken(String token, RoleType roleType) throws Exception {
+    public void validateToken(String token, RoleType... roleTypes) throws Exception {
 
         List<UserSession> userSessions = userSessionRepository.validateToken(token);
 
@@ -66,11 +66,16 @@ public class UserService {
         UserSession userSession = userSessions.get(0);
         long loginDate = userSession.getLoginDate().getTime();
         long currentTime = new java.util.Date().getTime();
-        if (userSession.getUser().getRoleType() != roleType.getValue()) {
-            throw new Exception("role type does not match");
-        } else if (currentTime - loginDate > timeDuration) {
+
+        if (currentTime - loginDate > timeDuration) {
             throw new Exception("timeout");
         }
+        if (roleTypes.length == 1) {
+            if (userSession.getUser().getRoleType() != roleTypes[0].getValue()) {
+                throw new Exception("role type does not match");
+            }
+        }
+
     }
 
     public LoggedUser getLoggedUser(String token) throws Exception {

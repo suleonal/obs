@@ -92,7 +92,7 @@ public class StudentController {
             @PathVariable("lectureId") long lectureId,
             @PathVariable("studentId") long studentId) {
         try {
-            userService.validateToken(token, RoleType.Student);
+            userService.validateToken(token, RoleType.Student, RoleType.Teacher);
             service.addLectureToStudent(lectureId, studentId);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
@@ -110,6 +110,18 @@ public class StudentController {
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @GetMapping("/lecture-students/{lectureId}")
+    public ResponseEntity<List<Student>> getStudentByLectureId(@RequestHeader("token") String token,
+            @PathVariable("lectureId") int lectureId) {
+        try {
+            userService.validateToken(token, RoleType.Teacher);
+            List<Student> students = service.getStudentsByLectureId(lectureId);
+            return new ResponseEntity<List<Student>>(students, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<List<Student>>(new ArrayList(), HttpStatus.UNAUTHORIZED);
         }
     }
 

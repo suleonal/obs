@@ -22,4 +22,5 @@ public interface LectureRepository extends JpaRepository<Lecture, Long> {
     @Query(value = "select * from lecture where teacher_id = :teacherId", nativeQuery = true)
     public List<Lecture> getTeacherLectures(@Param("teacherId") int teacherId);
 
+
 }

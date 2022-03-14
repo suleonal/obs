@@ -41,4 +41,5 @@ public class LectureService {
 	public List<Lecture> getTeacherLectures(int teacherId) {
 		return lectureRepository.getTeacherLectures(teacherId);
 	}
+
 }

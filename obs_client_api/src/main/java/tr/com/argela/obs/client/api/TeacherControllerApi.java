@@ -25,7 +25,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-03-11T17:36:06.719+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-03-14T16:52:04.716+03:00")
 @Component("tr.com.argela.obs.client.api.TeacherControllerApi")
 public class TeacherControllerApi {
     private ApiClient apiClient;

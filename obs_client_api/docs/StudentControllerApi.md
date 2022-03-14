@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**findByIdUsingGET2**](StudentControllerApi.md#findByIdUsingGET2) | **GET** /student/{id} | findById
 [**getAllUsingGET2**](StudentControllerApi.md#getAllUsingGET2) | **GET** /student/all | getAll
 [**getLecturesByStudentIdUsingGET**](StudentControllerApi.md#getLecturesByStudentIdUsingGET) | **GET** /student/lectures/{studentId} | getLecturesByStudentId
+[**getStudentByLectureIdUsingGET**](StudentControllerApi.md#getStudentByLectureIdUsingGET) | **GET** /student/lecture-students/{lectureId} | getStudentByLectureId
 [**saveUsingPOST2**](StudentControllerApi.md#saveUsingPOST2) | **POST** /student/save | save
 
 
@@ -273,6 +274,51 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**List&lt;Lecture&gt;**](Lecture.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a name="getStudentByLectureIdUsingGET"></a>
+# **getStudentByLectureIdUsingGET**
+> List&lt;Student&gt; getStudentByLectureIdUsingGET(lectureId, token)
+
+getStudentByLectureId
+
+### Example
+```java
+// Import classes:
+//import tr.com.argela.obs.client.invoker.ApiException;
+//import tr.com.argela.obs.client.api.StudentControllerApi;
+
+
+StudentControllerApi apiInstance = new StudentControllerApi();
+Integer lectureId = 56; // Integer | lectureId
+String token = "token_example"; // String | token
+try {
+    List<Student> result = apiInstance.getStudentByLectureIdUsingGET(lectureId, token);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling StudentControllerApi#getStudentByLectureIdUsingGET");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **lectureId** | **Integer**| lectureId |
+ **token** | **String**| token |
+
+### Return type
+
+[**List&lt;Student&gt;**](Student.md)
 
 ### Authorization
 

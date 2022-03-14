@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
 *StudentControllerApi* | [**findByIdUsingGET2**](docs/StudentControllerApi.md#findByIdUsingGET2) | **GET** /student/{id} | findById
 *StudentControllerApi* | [**getAllUsingGET2**](docs/StudentControllerApi.md#getAllUsingGET2) | **GET** /student/all | getAll
 *StudentControllerApi* | [**getLecturesByStudentIdUsingGET**](docs/StudentControllerApi.md#getLecturesByStudentIdUsingGET) | **GET** /student/lectures/{studentId} | getLecturesByStudentId
+*StudentControllerApi* | [**getStudentByLectureIdUsingGET**](docs/StudentControllerApi.md#getStudentByLectureIdUsingGET) | **GET** /student/lecture-students/{lectureId} | getStudentByLectureId
 *StudentControllerApi* | [**saveUsingPOST2**](docs/StudentControllerApi.md#saveUsingPOST2) | **POST** /student/save | save
 *TeacherControllerApi* | [**deleteByIdUsingDELETE3**](docs/TeacherControllerApi.md#deleteByIdUsingDELETE3) | **DELETE** /teacher/delete/{id} | deleteById
 *TeacherControllerApi* | [**findByIdUsingGET3**](docs/TeacherControllerApi.md#findByIdUsingGET3) | **GET** /teacher/{id} | findById

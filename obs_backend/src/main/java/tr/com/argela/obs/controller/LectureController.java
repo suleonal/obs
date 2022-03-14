@@ -39,7 +39,7 @@ public class LectureController {
     @GetMapping("/all")
     public ResponseEntity<List<Lecture>> getAll(@RequestHeader("token") String token) {
         try {
-            userService.validateToken(token, RoleType.Teacher);
+            userService.validateToken(token, RoleType.Teacher, RoleType.Student);
             List<Lecture> allLectures = service.getAll();
             return new ResponseEntity<List<Lecture>>(allLectures, HttpStatus.OK);
         } catch (Exception e) {

@@ -50,7 +50,7 @@ import tr.com.argela.obs.client.invoker.auth.HttpBasicAuth;
 import tr.com.argela.obs.client.invoker.auth.ApiKeyAuth;
 import tr.com.argela.obs.client.invoker.auth.OAuth;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-03-11T17:36:06.719+03:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2022-03-14T16:52:04.716+03:00")
 @Component("tr.com.argela.obs.client.invoker.ApiClient")
 public class ApiClient {
     public enum CollectionFormat {

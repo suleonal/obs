@@ -22,6 +22,7 @@ import tr.com.argela.obs.client.api.UserControllerApi;
 import tr.com.argela.obs.client.model.Grade;
 import tr.com.argela.obs.client.model.Lecture;
 import tr.com.argela.obs.client.model.LoggedUser;
+import tr.com.argela.obs.client.model.Student;
 
 @Component
 public class MainView {
@@ -51,7 +52,6 @@ public class MainView {
     RoleType loggedRole;
     LoggedUser loggedUser;
 
-
     public MainView() {
         sysin = new BufferedReader(new InputStreamReader(System.in));
         menuStudent.add("Dersleri Getir");
@@ -62,8 +62,9 @@ public class MainView {
 
         menuTeacher.add("Dersleri Göster");
         menuTeacher.add("Ders Hocası olarak ata");
-        menuTeacher.add("Dersdeki öğrencileri göster");
+        menuTeacher.add("Dersteki öğrencileri göster");
         menuTeacher.add("Derse not girişi yap");
+        menuTeacher.add("Derse öğrenci ekle");
     }
 
     public void start() {
@@ -101,7 +102,7 @@ public class MainView {
         loggedUser = userControllerApi.getLoggedUserUsingGET(token);
         loggedRole = RoleType.Student.getValue() == loggedUser.getRoleType() ? RoleType.Student : RoleType.Teacher;
 
-        System.out.println("Hoşgeldin "+ loggedUser.getEntityName());
+        System.out.println("Hoşgeldin " + loggedUser.getEntityName());
     }
 
     private void displayMainPage() {
@@ -133,18 +134,22 @@ public class MainView {
                 break;
             }
             case 2: {
-                addLectureToStudent();
+                assignTeacherToLecture();
                 break;
             }
             case 3: {
-                deleteLectureToStudent();
+                getStudentByLectureId();
                 break;
             }
             case 4: {
-                getGradeStudentById();
+                value();
                 break;
             }
             case 5: {
+                addLectureToStudent();
+                break;
+            }
+            case 6: {
                 logout();
                 displayLoginPage();
                 break;
@@ -156,12 +161,53 @@ public class MainView {
     private void displayTeacherLectures() {
         displayBrake();
         System.out.println("Öğretmene ait dersler aşağıdaki gibidir: ");
-        List<Lecture> lectures = teacherControllerApi.getLecturesByTeacherIdUsingGET(loggedUser.getEntityId().intValue(), token);
+        List<Lecture> lectures = teacherControllerApi
+                .getLecturesByTeacherIdUsingGET(loggedUser.getEntityId().intValue(), token);
         System.out.println("Ders\t\t\t| Hoca\t");
         displayBrakeShort();
         for (Lecture lecture : lectures) {
             System.out.println(lecture.getName() + "\t\t| " + lecture.getTeacher().getName());
         }
+    }
+
+    private void assignTeacherToLecture() {
+        displayBrake();
+
+    }
+
+    private void getStudentByLectureId() {
+        displayBrake();
+        System.out.println("Dersi seçiniz: ");
+        
+        List<Lecture> lectures = teacherControllerApi
+                .getLecturesByTeacherIdUsingGET(loggedUser.getEntityId().intValue(), token);
+
+        Map<Integer, Lecture> lectureMapByIndex = new LinkedHashMap<>();
+        int count = 1;
+        for (Lecture lecture : lectures) {
+            lectureMapByIndex.put(count, lecture);
+            System.out.println(count + "-)" + lecture.getName());
+            count++;
+        }
+        int selection = Integer.parseInt(readLine());
+        Lecture selectedLecture = lectureMapByIndex.get(selection);
+
+        if (selectedLecture == null) {
+            System.out.println("Ders secimi hatali");
+            return;
+        }
+        //dersi seçti. selectedLecture
+        lectures = studentControllerApi.getLecturesByStudentIdUsingGET(selectedLecture.getId(),token);
+        System.out.println("Ders\t\t\t| Öğrenci\t");
+        displayBrakeShort();
+        for (Lecture lecture : lectures ) {
+            System.out.println(lecture.getName() + "\t\t| " + );
+        }
+            
+    }
+
+    private void value(){
+
     }
 
     private void displayMainPageStudent() {
@@ -215,7 +261,8 @@ public class MainView {
         displayBrake();
         System.out.println("Çıkaracağınız dersi seçin: ");
 
-        List<Lecture> studentLectures = studentControllerApi.getLecturesByStudentIdUsingGET(loggedUser.getEntityId(), token);
+        List<Lecture> studentLectures = studentControllerApi.getLecturesByStudentIdUsingGET(loggedUser.getEntityId(),
+                token);
 
         Map<Integer, Lecture> lectureMapByIndex = new LinkedHashMap<>();
         int count = 1;
@@ -232,7 +279,8 @@ public class MainView {
             return;
         }
 
-        studentControllerApi.deleteLectureToStudentUsingDELETE(selectedLecture.getId(), loggedUser.getEntityId(),token);
+        studentControllerApi.deleteLectureToStudentUsingDELETE(selectedLecture.getId(), loggedUser.getEntityId(),
+                token);
         System.out.println("Ders başarı ile silindi.");
     }
 
@@ -240,7 +288,8 @@ public class MainView {
         displayBrake();
         System.out.println("Eklenecek dersi seciniz");
         List<Lecture> allLectures = lectureControllerApi.getAllUsingGET1(token);
-        List<Lecture> studentLectures = studentControllerApi.getLecturesByStudentIdUsingGET(loggedUser.getEntityId(), token);
+        List<Lecture> studentLectures = studentControllerApi.getLecturesByStudentIdUsingGET(loggedUser.getEntityId(),
+                token);
 
         Map<Long, Lecture> studentLecturesMapById = new HashMap<>(); // ogrencinin derslerini lecture id ile map le
         for (Lecture lecture : studentLectures) {
@@ -277,7 +326,7 @@ public class MainView {
 
     private void getGradeStudentById() {
         displayBrake();
-        List<Grade> grades = gradeControllerApi.getGradeStudentByIdUsingGET(loggedUser.getEntityId(),token);
+        List<Grade> grades = gradeControllerApi.getGradeStudentByIdUsingGET(loggedUser.getEntityId(), token);
         System.out.println("Ders\t\t\t| Not\t");
         displayBrakeShort();
         for (Grade grade : grades) {
