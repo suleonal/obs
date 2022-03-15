@@ -23,6 +23,7 @@ import tr.com.argela.obs.client.model.Grade;
 import tr.com.argela.obs.client.model.Lecture;
 import tr.com.argela.obs.client.model.LoggedUser;
 import tr.com.argela.obs.client.model.Student;
+import tr.com.argela.obs.client.model.Teacher;
 
 @Component
 public class MainView {
@@ -64,7 +65,6 @@ public class MainView {
         menuTeacher.add("Ders Hocası olarak ata");
         menuTeacher.add("Dersteki öğrencileri göster");
         menuTeacher.add("Derse not girişi yap");
-        menuTeacher.add("Derse öğrenci ekle");
     }
 
     public void start() {
@@ -146,10 +146,6 @@ public class MainView {
                 break;
             }
             case 5: {
-                addLectureToStudent();
-                break;
-            }
-            case 6: {
                 logout();
                 displayLoginPage();
                 break;
@@ -171,14 +167,51 @@ public class MainView {
     }
 
     private void assignTeacherToLecture() {
+
         displayBrake();
+        System.out.println("Dersi seçiniz: ");
+
+        List<Lecture> teacherLectures = teacherControllerApi
+                .getLecturesByTeacherIdUsingGET(loggedUser.getEntityId().intValue(), token);
+
+        List<Lecture> allLectures = lectureControllerApi.getAllUsingGET1(token);
+
+        Map<Integer, Lecture> teacherLecturesMapByIndex = new HashMap<>();
+        for (Lecture lecture : teacherLectures) {
+            teacherLecturesMapByIndex.put(lecture.getId().intValue(), lecture);
+        }
+
+        Map<Integer, Lecture> lectureMapByIndex = new LinkedHashMap<>();
+        int count_ = 1;
+        for (Lecture lecture : allLectures) {
+            if (teacherLecturesMapByIndex.get(lecture.getId().intValue()) != null)
+                continue; // ders zaten ekli
+            lectureMapByIndex.put(count_, lecture);
+            System.out.println(count_ + "-)" + lecture.getName());
+            count_++;
+        }
+        if (count_ == 1) {
+            System.out.println("Tüm dersleri eklediniz.");
+            return;
+        }
+
+        int selection = Integer.parseInt(readLine());
+        Lecture selectedLecture = lectureMapByIndex.get(selection);
+
+        if (selectedLecture == null) {
+            System.out.println("Ders secimi hatali");
+            return;
+        }
+
+        // ders ve öğretmeni seçti. selected
+        lectureControllerApi.assignTeacherToLectureUsingPUT(selectedLecture.getId(), loggedUser.getEntityId(), token);
 
     }
 
-    private void getStudentByLectureId() {
+    private void value() {
         displayBrake();
         System.out.println("Dersi seçiniz: ");
-        
+
         List<Lecture> lectures = teacherControllerApi
                 .getLecturesByTeacherIdUsingGET(loggedUser.getEntityId().intValue(), token);
 
@@ -196,19 +229,52 @@ public class MainView {
             System.out.println("Ders secimi hatali");
             return;
         }
-        //dersi seçti. selectedLecture
-        lectures = studentControllerApi.getLecturesByStudentIdUsingGET(selectedLecture.getId(),token);
-        System.out.println("Ders\t\t\t| Öğrenci\t");
+        // dersi seçti. selectedLecture
+        List<Student> students = studentControllerApi.getStudentByLectureIdUsingGET(selectedLecture.getId().intValue(),
+                token);
+        System.out.println("Öğrenci\t");
         displayBrakeShort();
-        for (Lecture lecture : lectures ) {
-            System.out.println(lecture.getName() + "\t\t| " + );
+        for (Student student : students) {
+            System.out.print(student.getName() + ":");
+            int value = Integer.parseInt(readLine());
+            gradeControllerApi.valueUsingPUT(selectedLecture.getId(), student.getId(), token, value);
         }
-            
-    }
-
-    private void value(){
 
     }
+
+    private void getStudentByLectureId() {
+        displayBrake();
+        System.out.println("Dersi seçiniz: ");
+
+        List<Lecture> lectures = teacherControllerApi
+                .getLecturesByTeacherIdUsingGET(loggedUser.getEntityId().intValue(), token);
+
+        Map<Integer, Lecture> lectureMapByIndex = new LinkedHashMap<>();
+        int count = 1;
+        for (Lecture lecture : lectures) {
+            lectureMapByIndex.put(count, lecture);
+            System.out.println(count + "-)" + lecture.getName());
+            count++;
+        }
+        int selection = Integer.parseInt(readLine());
+        Lecture selectedLecture = lectureMapByIndex.get(selection);
+
+        if (selectedLecture == null) {
+            System.out.println("Ders secimi hatali");
+            return;
+        }
+        // dersi seçti. selectedLecture
+        List<Student> students = studentControllerApi.getStudentByLectureIdUsingGET(selectedLecture.getId().intValue(),
+                token);
+        System.out.println(" Öğrenci\t");
+        displayBrakeShort();
+        for (Student student : students) {
+            System.out.println(student.getName());
+        }
+
+    }
+
+ 
 
     private void displayMainPageStudent() {
         displayBrake();
