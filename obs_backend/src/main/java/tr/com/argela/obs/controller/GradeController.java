@@ -74,7 +74,7 @@ public class GradeController {
     public ResponseEntity<Grade> value(@RequestHeader("token") String token, @PathVariable("lectureId") long lectureId,
             @PathVariable("studentId") long studentId, @PathVariable("value") int value) {
         try {
-            userService.validateToken(token, RoleType.Student);
+            userService.validateToken(token, RoleType.Student,RoleType.Teacher);
             service.value(lectureId, studentId, value);
             return new ResponseEntity<Grade>(HttpStatus.OK);
         } catch (Exception e) {
