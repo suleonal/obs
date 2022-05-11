@@ -26,6 +26,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     private long id;
 
     @Column(name = "username")
@@ -43,7 +44,7 @@ public class User {
     @Column(name = "last_login")
     private Date lastLogin;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(mappedBy = "user")
     @JsonIgnore
     private Student student;
 
@@ -51,4 +52,11 @@ public class User {
     @JsonIgnore
     private Teacher teacher;
 
+    public User(long id) {
+        this.id = id;
+    }
+
+    public User() {
+
+    }
 }

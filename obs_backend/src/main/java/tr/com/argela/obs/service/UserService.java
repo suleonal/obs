@@ -41,7 +41,7 @@ public class UserService {
             String GUID = GeneralUtil.getGUID();
 
             UserSession userSession = new UserSession();
-            userSession.setUser(user);
+            userSession.setUser(new User(user.getId()));
             userSession.setSessionId(GUID);
             userSession.setLoginDate(new Date());
 

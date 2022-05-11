@@ -41,16 +41,16 @@ public class Student {
     @Column(name = "adress")
     private String adress;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "user_id")
     private User user;
 
     @NotNull
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    @OneToMany(mappedBy = "student")
     @JsonIgnore
     private List<Grade> grades;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "student_lecture", joinColumns = {
             @JoinColumn(name = "student_id", referencedColumnName = "ID") }, inverseJoinColumns = {
                     @JoinColumn(name = "lecture_id", referencedColumnName = "ID") })

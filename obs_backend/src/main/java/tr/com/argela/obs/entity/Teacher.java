@@ -39,12 +39,12 @@ public class Teacher {
     @Column(name = "adress")
     private String adress;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JsonIgnore
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
+    @OneToMany(mappedBy = "teacher")
     @JsonIgnore
     private List<Lecture> lectures;
 

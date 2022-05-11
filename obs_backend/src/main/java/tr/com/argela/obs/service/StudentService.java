@@ -47,4 +47,8 @@ public class StudentService {
         return studentRepository.getStudentsByLectureId(lectureId);
     }
 
+    public Student save(String string) {
+        return null;
+    }
+
 }
